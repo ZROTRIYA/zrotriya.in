@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Cache-Control" content="max-age=259200, must-revalidate" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="googlebot" content="archive" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Zrotriya`16 ||BET TO WIN</title>
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <meta name="viewport" content="width=600px, user-scalable=no">
+      <!-- MAIN FAVICON -->
+      <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="stylesheets/normalize-min.css">
+      <link rel="stylesheet" href="stylesheets/404.css">
+      <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <script src="js/jquery-2.1.1.min.js"></script>
+      <script type='text/javascript'>
+         $(document).ready(function(){
+         var width = $(window).width() - $(".spaceman").width()-20;
+         var height = $(window).height() - $(".spaceman").height()-20;
+         var extra = 0;
+         var angle;
+         var a;
+         var b;
+         var x;
+         var y;
+         var angle;
+         var n;
+         var m;
+         var quadrant;
+         var horizontal;
+         var vertical;
+         var alpha;
+         var side;
+         var topbottom;
+         var sides;
+         var i = 1;
+         changeDir();
+         function changeDir()
+         {
+         if (i == 1)
+         {
+         a = 0;
+         b = 0;
+         //determine first angle randonmly
+         angle = Math.floor(30);
+         } else
+         {
+         a = xcoord();
+         b = ycoord();
+         }
+         findNewCoordinate(a, b);
+         i++;
+         }
+         function findNewCoordinate(a, b)
+         {
+         if (angle >= 0 && angle < 90) { quadrant = 1; horizontal = width-a; vertical = b; alpha = (90 - angle); }
+         else if (angle >= 90 && angle < 180) { quadrant = 4; horizontal = width-a; vertical = height-b; alpha = (angle-90); }
+         else if (angle >= 180 && angle < 270) { quadrant = 3; horizontal = a; vertical = height-b; alpha = (270-angle); }
+         else if (angle >= 270 && angle <= 360) { quadrant = 2; horizontal = a; vertical = b; alpha = (angle-270); }
+         var cosa = Math.cos(alpha * Math.PI / 180);
+         var sina = Math.sin(alpha * Math.PI / 180);
+         var tana = Math.tan(alpha * Math.PI / 180);
+         var cost = Math.cos(angle * Math.PI / 180);
+         var sint = Math.sin(angle * Math.PI / 180);
+         var tant = Math.tan(angle * Math.PI / 180);
+         n = horizontal/cosa;
+         m = vertical/sina;
+         switch (quadrant)
+         {
+         case 1:
+         if (m >= n) //hit at side
+         {
+         y = b - horizontal*tana; //done
+         x = width; //done
+         angle = 270+alpha; //done
+         } else
+         {
+         y = 0; //done
+         x = a + vertical*tant; //done
+         angle = 180-angle; //done
+         }
+         side = "right side"; topbottom = "top";
+         break;
+         case 2:
+         if (m >= n) //hit at side
+         {
+         y = b-horizontal*tana; //done
+         x = 0; //done
+         angle = 90-alpha; //done
+         } else
+         {
+         y = 0; //done
+         x = a - vertical/tana; //done
+         angle = 270-alpha; //done
+         }
+         side = "left side"; topbottom = "top";
+         break;
+         case 3: side = "left side"; topbottom = "bottom";
+         if (m >= n) //hit at side
+         {
+         x = 0; //done
+         y = b + tana*horizontal; //done
+         angle = 90+alpha; //done
+         } else
+         {
+         y = height; //done
+         x = a - vertical/tana; //done
+         angle = 270+alpha; //done
+         } break;
+         case 4: side = "right side"; topbottom = "bottom";
+         if (m >= n) //hit at side
+         {
+         y = b+horizontal*tana; //done
+         x = width; //done
+         angle = 270-alpha; //done
+         } else
+         {
+         y = height; //done
+         x = a + vertical/tana; //done
+         angle = 90-alpha; //done
+         } break;
+         }
+         var lenX = $(".spaceman").offset().left-x;
+         var lenY = $(".spaceman").offset().top-y;
+         var dist = Math.sqrt(lenX*lenX+lenY*lenY);
+         var diagonal = Math.sqrt(width*width+height*height);
+         $(".spaceman").animate({"left": x, "top": y},25000*dist/diagonal, function(){
+         changeDir();
+         })
+         }
+         function xcoord()
+         {
+         return x;
+         }
+         function ycoord()
+         {
+         return y;
+         }
+         /*changeDir(1,1);
+         function changeDir(ax, ay){
+         var curX = $(".spaceman").offset().left;
+         var curY = $(".spaceman").offset().top;
+         var wdt = $(window).width();
+         var hgt = $(window).height();
+         var xPoint1 = 0;
+         var xPoint2 = wdt - $(".spaceman").width();
+         var yPoint1 = 0;
+         var yPoint2 = hgt - $(".spaceman").height();
+         var destX = 0;
+         var destY = 0;
+         if(ax==1)destX = xPoint2;
+         if(ay==1)destY = yPoint2;
+         destX = (ay/ax)*(destY-curY)+curX;
+         if(destX>xPoint2 || destX<xPoint1){
+         ax = (-1)*ax;
+         ay = (-1)*ay;
+         if(destX>xPoint2){
+         var diff = destX - xPoint2;
+         destX=xPoint2;
+         }
+         else {
+         var diff = destX - xPoint1;
+         destX=xPoint1;
+         }
+         destY += diff;
+         }
+         console.log(destX);
+         console.log(destY);
+         $(".spaceman").animate({"left": destX, "top": destY},500, function(){
+         ay = (-1)*ay;
+         changeDir(ax,ay);
+         })
+         }; */
+         })
+      </script>
+   </head>
+   <body>
+      <div class='error-wrapper'>
+         <div class='spaceman'></div>
+         <div class='text-wrapper'>
+            <h2>Bet To Win<br><br><br><br></h2>
+			<h3>Complete the task given to you and win 3 times the money you have bet!!!</h3>
+			
+            <p><a href='/'>Back to the home</a></p>
+         </div>
+      </div>
+   </body>
+</html>
